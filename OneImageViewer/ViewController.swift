@@ -31,7 +31,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         button.addTarget(self, action: #selector(action(sender:)), for: UIControlEvents.touchUpInside)
     }
     @objc func action(sender: Any) {
-        print("111")
+        let picker: UIImagePickerController = UIImagePickerController()
+        if  UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            picker.allowsEditing = true
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+        }
     }
     
 
