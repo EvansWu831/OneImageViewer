@@ -39,7 +39,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scrollView.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
         scrollView.delegate = self
         scrollView.frame = CGRect(x: 0, y: 0, width: 375, height: 590)
-        
+        scrollView.contentSize = CGSize(width: 2000, height: 2000)
         scrollView.minimumZoomScale = 1.0  //縮放最小限界
         scrollView.maximumZoomScale = 2.0  //縮放最大限界
 
@@ -62,7 +62,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var yellowView: UIView!
     func setupView() {
         yellowView = UIView()
-        yellowView.backgroundColor = UIColor.yellow
+        yellowView.backgroundColor = UIColor(red: 249/255, green: 223/255, blue: 23/255, alpha: 1)
         yellowView.frame = CGRect(x: 0, y: 590, width: 375, height: 77)
     }
     //button
@@ -98,6 +98,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.white
         //show scrollView
         setupScrollView()
         view.addSubview(scrollView)
@@ -110,10 +111,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //show button in View
         setupButton()
         yellowView.addSubview(button)
+        
+        //test
+//        layout()
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
+    //test
+//    func layout() {
+//        let leading = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal,
+//                                         toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 50.0)
+//
+//        let trailing = NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal,
+//                                          toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: -50.0)
+//
+//        let top = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal,
+//                                     toItem: self.view, attribute: .top, multiplier: 1.0, constant: 100.0)
+//
+//        let height = NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal,
+//                                        toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 120.0)
+//
+//        self.view.addConstraint(leading)
+//        self.view.addConstraint(trailing)
+//        self.view.addConstraint(top)
+//        self.view.addConstraint(height)
+//    }
 
 }
 
