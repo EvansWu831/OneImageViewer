@@ -9,6 +9,29 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
+    
+    
+    
+//    @available(iOS 3.0, *)
+//    open var zoomScale: CGFloat// default is 1.0
+//
+//    @available(iOS 3.0, *)
+//    open func setZoomScale(_ scale: CGFloat, animated: Bool)
+//
+//    @available(iOS 3.0, *)
+//    open func zoom(to rect: CGRect, animated: Bool)
+//
+//
+//    open var bouncesZoom: Bool
+//    default is YES. if set, user can go past min/max zoom while gesturing and the zoom will animate to the min/max value at gesture end
+//
+//
+//    open var isZooming: Bool { get }
+    // returns YES if user in zoom gesture
+//
+//    open var isZoomBouncing: Bool { get }
+//    returns YES if we are in the middle of zooming back to the min/max value
+
     //scrollView
     var scrollView: UIScrollView!
     func setupScrollView() {
@@ -16,14 +39,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scrollView.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
         scrollView.delegate = self
         scrollView.frame = CGRect(x: 0, y: 0, width: 375, height: 590)
+        
+        scrollView.minimumZoomScale = 1.0  //縮放最小限界
+        scrollView.maximumZoomScale = 2.0  //縮放最大限界
+
+        
+        
     }
+
     //imageView
     var imageView: UIImageView!
     func setupImageView() {
-        guard let image: UIImage = UIImage(named:"icon_photo") else { return }
-        imageView = UIImageView(image: image)
+//        let image: UIImage = UIImage(named:"icon_photo")!
+        imageView = UIImageView()
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.image = UIImage(named: "icon_photo")
         imageView.frame = CGRect(x: 0, y: 0, width: 375, height: 590)
         imageView.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
+        
     }
     //View
     var yellowView: UIView!
@@ -77,8 +110,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //show button in View
         setupButton()
         yellowView.addSubview(button)
-
-        
     }
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+
 }
 
