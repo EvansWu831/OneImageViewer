@@ -42,15 +42,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scrollView.contentSize = CGSize(width: 2000, height: 2000)
         scrollView.minimumZoomScale = 1.0  //縮放最小限界
         scrollView.maximumZoomScale = 2.0  //縮放最大限界
-
-        
-        
     }
 
     //imageView
     var imageView: UIImageView!
     func setupImageView() {
-//        let image: UIImage = UIImage(named:"icon_photo")!
         imageView = UIImageView()
         imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.image = UIImage(named: "icon_photo")
@@ -112,31 +108,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         setupButton()
         yellowView.addSubview(button)
         
-        //test
-//        layout()
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-    //test
-//    func layout() {
-//        let leading = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal,
-//                                         toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 50.0)
-//
-//        let trailing = NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal,
-//                                          toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: -50.0)
-//
-//        let top = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal,
-//                                     toItem: self.view, attribute: .top, multiplier: 1.0, constant: 100.0)
-//
-//        let height = NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal,
-//                                        toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 120.0)
-//
-//        self.view.addConstraint(leading)
-//        self.view.addConstraint(trailing)
-//        self.view.addConstraint(top)
-//        self.view.addConstraint(height)
-//    }
-
 }
 
