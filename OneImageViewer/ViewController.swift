@@ -8,28 +8,41 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    
-    
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
+    //scrollView
+    var scrollView: UIScrollView!
+    func setupScrollView() {
+        scrollView = UIScrollView()
+        scrollView.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
+        scrollView.delegate = self
+        scrollView.frame = CGRect(x: 0, y: 0, width: 375, height: 590)
+    }
+    //imageView
     var imageView: UIImageView!
     func setupImageView() {
-        let image: UIImage = UIImage(named:"image-landing")!
+        guard let image: UIImage = UIImage(named:"icon_photo") else { return }
         imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        imageView.frame = CGRect(x: 0, y: 0, width: 375, height: 590)
+        imageView.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
     }
-    
+    //View
+    var yellowView: UIView!
+    func setupView() {
+        yellowView = UIView()
+        yellowView.backgroundColor = UIColor.yellow
+        yellowView.frame = CGRect(x: 0, y: 590, width: 375, height: 77)
+    }
+    //button
     var button: UIButton!
     func setupButton() {
         button = UIButton(type: UIButtonType.system)
-        button.bounds = CGRect(x: 0, y: 0, width: view.bounds.width / 2, height: 50)
-        button.center = CGPoint(x: view.bounds.width / 2, y: 650)
-        button.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 0.5)
+        button.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
+        button.frame = CGRect(x: 98, y: 17, width: 180, height: 44)
         button.setTitle("Pick an Image", for: UIControlState.normal)
         button.setTitleColor(UIColor.white, for: UIControlState.normal)
-        button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(action(sender:)), for: UIControlEvents.touchUpInside)
     }
+    //buttonAction
     @objc func action(sender: Any) {
         let picker: UIImagePickerController = UIImagePickerController()
         if  UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
@@ -39,7 +52,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.present(picker, animated: true, completion: nil)
         }
     }
-    
+    //相簿選取Action
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         self.imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -49,23 +62,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
+    //viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.white
-        setupButton()
-        view.addSubview(button)
+        //show scrollView
+        setupScrollView()
+        view.addSubview(scrollView)
+        //show imageView in scrollView
         setupImageView()
-        view.addSubview(imageView)
+        scrollView.addSubview(imageView)
+        //show View
+        setupView()
+        view.addSubview(yellowView)
+        //show button in View
+        setupButton()
+        yellowView.addSubview(button)
+
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
